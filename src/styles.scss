@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+// @import 'bootstrap.css';
+// @import 'bootstrap_nav.css';
+html, body { height: 100%;
+overflow-x: hidden; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+.spacer{
+    height: 10px;
+    width: 10px;
+}

@@ -1,0 +1,38 @@
+.main{
+    &-container{
+        text-align: center;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &-iconimg{
+        height: 100px;
+        width: 100px;
+    }
+    
+}
+table{
+    width: 100%;
+}
+td.left{
+    text-align: left;
+}
+td.right{
+    text-align: right;
+}
+.pie-chart{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    // height: 500px;
+    display: flex;
+}
+.bar-chart{
+    width: 100%;
+    // height: 500px;
+    display: block;
+}

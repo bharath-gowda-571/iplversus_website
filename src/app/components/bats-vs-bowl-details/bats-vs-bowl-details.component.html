@@ -1,0 +1,166 @@
+<div class="main-container">
+    <span>
+            <img src="assets/batting.png" alt="batsman" class="main-iconimg">
+            <h2>{{batsman}}</h2>
+    </span>
+    <span class="spacer"></span>
+    <span class="spacer"></span>
+    <span class="spacer"></span>
+    <span><h1>Vs</h1></span>
+    <span class="spacer"></span>
+    <span class="spacer"></span>
+    <span class="spacer"></span>
+    <span>
+        <img src="assets/bowling.png" alt="bowler" class="main-iconimg">
+        <h2>{{bowler}}</h2>
+    </span>
+</div>
+<hr>
+<div class="text-center" *ngIf="loading">
+  <div class="spinner-border" role="status">    
+</div>
+</div>
+<div *ngIf="nvr_fcd_off" style="text-align: center;padding-top: 30px;">
+  These Players have never faced off
+</div>
+<div class="row" *ngIf="!loading && !nvr_fcd_off">
+  <div class =" col-md-3 ">
+      <h2>All Data</h2>
+      <table>
+          <tr>
+            <td class="left">Innings</td>
+            <td>-</td>
+            <td class="right">{{inngs_arr.length}}</td>
+          </tr>
+
+          <tr>
+              <td class="left">Runs</td>
+              <td>-</td>
+              <td class="right">{{runs}}</td>
+            </tr>
+            <tr>
+              <td class="left">Balls</td>
+              <td>-</td>
+              <td class="right">{{balls}}</td>
+            </tr>
+            <tr>
+              <td class="left">Avg Strike Rate</td>
+              <td>-</td>
+              <td class="right">{{avg_strike_rate | number:'1.2-3'}}</td>
+            </tr>
+            <tr *ngIf="dissmissal!=0">
+              <td class="left">Batting Average</td>
+              <td >-</td>
+              <td class="right">{{runs/dissmissal |number:'1.2-3'}}</td>
+            </tr>
+            <tr>
+              <td class="left">Dissmisals</td>
+              <td>-</td>
+              <td class="right">{{dissmissal}}</td>
+            </tr>
+            <tr>
+              <td class="left">Sixes</td>
+              <td>-</td>
+              <td class="right">{{sixes}}</td>
+            </tr>
+            <tr>
+              <td class="left">Fours</td>
+              <td>-</td>
+              <td class="right">{{fours}}</td>
+            </tr>
+            <tr>
+              <td class="left">Wides</td>
+              <td>-</td>
+              <td class="right">{{wides}}</td>
+            </tr>
+            <tr>
+              <td class="left">No Balls</td>
+              <td>-</td>
+              <td class="right">{{noballs}}</td>
+            </tr>
+        </table> 
+  </div>
+  <div class="col-md-4 ">
+    
+    <h2>Dissmisal Types</h2>
+    <ul class="nav nav-tabs justify-content-center">
+      <li class="nav-item">
+        <a [class]="chartTabClass" aria-current="page" (click)="changeChartOrData('chart')" >Chart</a>
+      </li>
+      <li class="nav-item" >
+        <a [class]="dataTabClass" (click)="changeChartOrData('data')">Data</a>
+      </li>
+      
+    </ul>
+    <div  class="pie-chart" *ngIf="dissmissal!=0 && chart_or_data1">
+      <canvas baseChart 
+        [data]="pieChartData1" 
+        [labels]="pieChartLabels1" 
+        [chartType]="pieChartType1"
+        [options]="pieChartOptions1"
+        [plugins]="pieChartPlugins1"
+        [legend]="pieChartLegend1"
+        [colors]="donutColors1"
+        >
+      </canvas>
+    </div>
+    <div *ngIf="dissmissal!=0 && !chart_or_data1">
+      <table>
+        <tr *ngFor="let diss of pieChartLabels1;index as i">
+          <td>{{diss}}</td>
+          <td>-</td>
+          <td>{{pieChartData1[i]}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div *ngIf="dissmissal==0" style="text-align: center;">{{bowler}} never dissmissed {{batsman}}</div>
+
+  
+    
+  </div>
+  <div class="col-md-5">
+    <h2>Strike Rate Over Years</h2>
+
+    <ul class="nav nav-tabs justify-content-center">
+      <li class="nav-item">
+        <a [class]="chartTabClass2" aria-current="page" (click)="changeChartOrData2('chart')" >Chart</a>
+      </li>
+      <li class="nav-item" >
+        <a [class]="dataTabClass2" (click)="changeChartOrData2('data')">Data</a>
+      </li>
+      
+    </ul>
+    <div  class="bar-chart" *ngIf="chart_or_data2">
+      <canvas baseChart 
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [legend]="barChartLegend"
+        [chartType]="barChartType"
+        *ngIf="!loading">
+      </canvas>
+      </div>
+    <div *ngIf="!chart_or_data2">
+      <table>
+        <tr *ngFor="let year of barChartLabels;index as i">
+          <td class="left">{{year}}</td>
+          <td>-</td>
+          <td >{{barChartData[0].data![i] }}</td>
+
+        </tr>
+      </table>
+    </div>
+    <div >
+
+    </div>
+  </div>
+  
+</div>
+
+<hr>
+<div>
+  <h2>Data By Year</h2>
+
+</div>
