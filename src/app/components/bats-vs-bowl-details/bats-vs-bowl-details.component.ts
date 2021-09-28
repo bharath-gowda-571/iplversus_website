@@ -88,7 +88,7 @@ export class BatsVsBowlDetailsComponent implements OnInit {
     { data: [], label: 'Strike Rate' }
   ];
 
-
+  public all_data!:Ball[];
   public batsman!:any;
   public bowler!:any;
   public ball_keys!:any;
@@ -142,28 +142,18 @@ export class BatsVsBowlDetailsComponent implements OnInit {
     this.batsman=this.route.snapshot.paramMap.get("batsman")
     this.bowler=this.route.snapshot.paramMap.get("bowler")
 
-    
-    // getting ball keys from service
-    this._playerService.getBatsVsBowlBalls(this.batsman,this.bowler).subscribe(async val=>{
-    
-      
-      this.ball_keys=val;
-      
+    this.ball_data= await this._playerService.getBatsmanVsBowlerData(this.batsman,this.bowler)
 
-      // check if these players have never faced off
-      if(this.ball_keys==null){
-        this.loading=false
-        this.nvr_fcd_off=true
-        return
-      }
-      // looping through all the ball keys
-      for(var ball of this.ball_keys){
-        // getting ball  data from ball keys
-        var data=await this._playerService.getBallData(ball)    
-          this.ball_data.push(data);
-      }
+    if(this.ball_data==null){
+      this.loading=false
+      this.nvr_fcd_off=true
+      return
+    }
+
+
       this.loading=false
         for(var data of this.ball_data){ 
+
         // checking if year is present in matches_each_year
           if(this.data_each_year[data.year]==undefined){
         
@@ -253,7 +243,7 @@ export class BatsVsBowlDetailsComponent implements OnInit {
 
       this.data_by_match[match].strike_rate=(this.data_by_match[match].runs*100)/this.data_by_match[match].balls
     }
-    console.log(this.data_each_year)
+    
 
       // calculating strike rate each year
       var temp_strike_rate=0
@@ -278,8 +268,6 @@ export class BatsVsBowlDetailsComponent implements OnInit {
       this.barChartData[0].data!.push(0)
       this.loading=false
       this.barChartData[0].backgroundColor='rgba(89, 180, 201,1)'
-    })
-    
   
   }
 

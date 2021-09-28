@@ -14,12 +14,11 @@ export class PlayersService {
     return this.http.get<PlayerPopName[]>("https://ipl-versus-default-rtdb.asia-southeast1.firebasedatabase.app/pop_player_names.json");
   }
 
-  getBatsVsBowlBalls(batsman:string,bowler:string){
-      return this.http.get("https://cricket-statistics-default-rtdb.asia-southeast1.firebasedatabase.app/ipl/players_balls_involved/"+encodeURI(batsman)+"/batting/"+encodeURI(bowler)+".json")
-  }
 
-  async getBallData(ball:string):Promise<Ball>{
-    return (await this.http.get<Ball>("https://cricket-statistics-default-rtdb.asia-southeast1.firebasedatabase.app/ipl/all_balls/"+encodeURI(ball)+".json").toPromise())
+  async getBatsmanVsBowlerData(batsman:string,bowler:string):Promise<Ball[]>
+  {
+    return (await this.http.get<Ball[]>("https://ipl-versus-default-rtdb.asia-southeast1.firebasedatabase.app/batsman_vs_bowler_data/" + encodeURI(batsman) + "/" + encodeURI(bowler) + ".json").toPromise())
+    
   }
 }
 
