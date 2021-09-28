@@ -142,6 +142,7 @@ export class BatsVsBowlDetailsComponent implements OnInit {
     this.batsman=this.route.snapshot.paramMap.get("batsman")
     this.bowler=this.route.snapshot.paramMap.get("bowler")
 
+    
     // getting ball keys from service
     this._playerService.getBatsVsBowlBalls(this.batsman,this.bowler).subscribe(async val=>{
     

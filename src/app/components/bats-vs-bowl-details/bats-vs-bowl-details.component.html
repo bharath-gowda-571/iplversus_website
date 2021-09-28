@@ -129,8 +129,8 @@
       <li class="nav-item" >
         <a [class]="dataTabClass2" (click)="changeChartOrData2('data')">Data</a>
       </li>
-      
     </ul>
+
     <div  class="bar-chart" *ngIf="chart_or_data2">
       <canvas baseChart 
         [datasets]="barChartData"
@@ -162,5 +162,10 @@
 <hr>
 <div>
   <h2>Data By Year</h2>
-
+  <ul class="nav nav-tabs justify-content-center">
+    <li class="nav-item" *ngFor="let year of barChartLabels">
+      <a class="nav-link active" aria-current="page" >{{year}}</a>
+    </li>
+  </ul>
+  
 </div>
