@@ -107,6 +107,7 @@ export class BatsVsBowlDetailsComponent implements OnInit {
 
   public data_each_year:DataEachYear={};
   public avg_strike_rate:number=0;
+  public yearTabsStyles!:string[];
 
   
   push_in_sorted_order(arr:string[],ele:string){
@@ -264,7 +265,8 @@ export class BatsVsBowlDetailsComponent implements OnInit {
       }
       this.avg_strike_rate=temp_strike_rate/this.inngs_arr.length
 
-      
+      this.yearTabsStyles=Array(this.barChartLabels.length).fill("nav-link")
+      this.yearTabsStyles[0]="nav-link active"
       this.barChartData[0].data!.push(0)
       this.loading=false
       this.barChartData[0].backgroundColor='rgba(89, 180, 201,1)'
@@ -305,6 +307,15 @@ export class BatsVsBowlDetailsComponent implements OnInit {
       this.chartTabClass2="nav-link"
     }
 
+  }
+
+  
+  public currentYearIndex=0;
+
+  switchYear(yearIndex:number){
+    this.yearTabsStyles[this.currentYearIndex]="nav-link"
+    this.currentYearIndex=yearIndex;
+    this.yearTabsStyles[this.currentYearIndex]="nav-link active"
   }
 
 

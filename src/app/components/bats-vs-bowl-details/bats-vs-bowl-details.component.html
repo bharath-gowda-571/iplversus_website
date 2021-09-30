@@ -163,9 +163,87 @@
 <div>
   <h2>Data By Year</h2>
   <ul class="nav nav-tabs justify-content-center">
-    <li class="nav-item" *ngFor="let year of barChartLabels">
-      <a class="nav-link active" aria-current="page" >{{year}}</a>
+    <li class="nav-item" *ngFor="let year of barChartLabels;index as i">
+      <a [class]="yearTabsStyles[i]" aria-current="page" (click)="switchYear(i)">{{year}}</a>
     </li>
   </ul>
-  
+  <div [ngSwitch]="currentYearIndex">
+    <div *ngFor="let year of barChartLabels;index as i">
+    <table  *ngIf="i==currentYearIndex">
+      <h3>
+        Teams
+      </h3>
+      <tr>
+        <td>{{batsman}}</td>
+        <td>-</td>
+        <td>{{data_each_year[year].batting_team}}</td>
+      </tr>
+      <tr>
+        <td>{{bowler}}</td>
+        <td>-</td>
+        <td>{{data_each_year[year].bowling_team}}</td>
+      </tr>
+
+      <h3>Data</h3>
+
+      <tr>
+        <td>Innings</td>
+        <td>-</td>
+        <td>{{data_each_year[year].matches.length}}</td>
+      </tr>
+
+      <tr>
+        <td>Runs</td>
+        <td>-</td>
+        <td>{{data_each_year[year].runs}}</td>
+      </tr>
+      
+      <tr>
+        <td>Balls</td>
+        <td>-</td>
+        <td>{{data_each_year[year].balls}}</td>
+      </tr>
+
+      <tr>
+        <td>Dissmisals</td>
+        <td>-</td>
+        <td>{{data_each_year[year].dissmissals}}</td>
+      </tr>
+      
+      <tr>
+        <td>Strike Rate</td>
+        <td>-</td>
+        <td>{{data_each_year[year].strike_rate}}</td>
+      </tr>
+
+      <tr>
+        <td>Batting Average</td>
+        <td>-</td>
+        <td>{{data_each_year[year].runs/data_each_year[year].dissmissals}}</td>
+      </tr>
+
+      <tr>
+        <td>Fours</td>
+        <td>-</td>
+        <td>{{data_each_year[year].fours}}</td>
+      </tr>
+
+      <tr>
+        <td>Sixes</td>
+        <td>-</td>
+        <td>{{data_each_year[year].sixes}}</td>
+      </tr>
+      <tr>
+        <td>No Balls</td>
+        <td>-</td>
+        <td>{{data_each_year[year].noballs}}</td>
+      </tr>
+      <tr>
+        <td>Wides</td>
+        <td>-</td>
+        <td>{{data_each_year[year].wides}}</td>
+      </tr>
+    </table>
+  </div>
+  </div>
 </div>
