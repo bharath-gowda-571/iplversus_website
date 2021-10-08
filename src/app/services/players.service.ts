@@ -20,5 +20,9 @@ export class PlayersService {
     return (await this.http.get<Ball[]>("https://ipl-versus-default-rtdb.asia-southeast1.firebasedatabase.app/batsman_vs_bowler_data/" + encodeURI(batsman) + "/" + encodeURI(bowler) + ".json").toPromise())
     
   }
+
+  getTeamNames():Observable<String[]>{
+    return this.http.get<String[]>("https://ipl-versus-default-rtdb.asia-southeast1.firebasedatabase.app/team_names.json");
+  }
 }
 

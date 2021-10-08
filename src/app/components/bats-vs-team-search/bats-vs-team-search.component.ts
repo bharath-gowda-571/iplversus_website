@@ -6,13 +6,13 @@ import { PlayerPopName } from 'src/app/player_pop_names';
 import { PlayersService } from 'src/app/services/players.service';
 import { Router } from '@angular/router';
 
-
 @Component({
-  selector: 'app-bats-vsbowl',
-  templateUrl: './bats-vsbowl.component.html',
-  styleUrls: ['./bats-vsbowl.component.scss']
+  selector: 'app-bats-vs-team-search',
+  templateUrl: './bats-vs-team-search.component.html',
+  styleUrls: ['./bats-vs-team-search.component.scss']
 })
-export class BatsVsbowlComponent implements OnInit {
+
+export class BatsVsTeamSearchComponent implements OnInit {
   constructor(private _playerService:PlayersService,private router:Router){}
 
   myControl1:any = new FormControl();
@@ -22,6 +22,8 @@ export class BatsVsbowlComponent implements OnInit {
 
   public players:PlayerPopName[]=[];
   public popular_player_names:string[]=[];
+  public teams:String[]=[];
+  public team_names:String[]=[];
   
   filteredOptions1!: Observable<string[]> ;
   filteredOptions2!: Observable<string[]> ;
@@ -38,48 +40,53 @@ export class BatsVsbowlComponent implements OnInit {
       }
     });
 
+    this._playerService.getTeamNames().subscribe(data=>{
+      this.teams = data;
+      for(var i of this.teams){
+        this.team_names.push(i);
+      }
+    });
+
     this.filteredOptions1 = this.myControl1.valueChanges
       .pipe(
         startWith(''),
-        map(value1 => this._filter(<string>value1))
+        map(value1 => this._filterbats(<string>value1))
       );
     this.filteredOptions2 = this.myControl2.valueChanges
       .pipe(
         startWith(''),
-        map(value2 => this._filter(<string>value2))
+        map(value2 => this._filterteams(<string>value2))
       );
   }
   
   
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    
-    
+  private _filterbats(value: string): String[] {
+    const filterValue = value.toLowerCase();  
     return this.popular_player_names.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  private _filterteams(value: string): String[] {
+    const filterValue = value.toLowerCase();
+    return this.team_names.filter(option => option.toLowerCase().includes(filterValue));
   }
   
   ButtonClick(){
     
     var batsman=this.myControl1.value;
-    var bowler=this.myControl2.value;
+    var team=this.myControl2.value;
     var batsman_code_name=this.pop_name_map.get(batsman)
-    var bowler_code_name=this.pop_name_map.get(bowler);
+
     
     if(batsman_code_name==undefined){
       this.error_msg="Choose a batsman"
       return
     }
 
-    if(bowler_code_name==undefined){
-      this.error_msg="Choose a bowler"
+    if(team==undefined){
+      this.error_msg="Choose a team"
       return
     }
 
-    if(batsman_code_name==bowler_code_name){
-      this.error_msg="Batsman and Bowler cannot be same"
-      return
-    }
-
-    this.router.navigate(['/batsvsbowldetails',batsman_code_name,bowler_code_name]);
+    this.router.navigate(['/batsvsbowldetails',batsman_code_name,team]);
   }
 }
