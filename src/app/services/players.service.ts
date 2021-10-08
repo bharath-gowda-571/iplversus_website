@@ -21,5 +21,9 @@ export class PlayersService {
   async getBallData(ball:string):Promise<Ball>{
     return (await this.http.get<Ball>("https://cricket-statistics-default-rtdb.asia-southeast1.firebasedatabase.app/ipl/all_balls/"+encodeURI(ball)+".json").toPromise())
   }
+
+  getTeamNames():Observable<String[]>{
+    return this.http.get<String[]>("https://ipl-versus-default-rtdb.asia-southeast1.firebasedatabase.app/team_names.json");
+  }
 }
 
