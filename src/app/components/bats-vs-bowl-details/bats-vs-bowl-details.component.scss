@@ -36,3 +36,54 @@ td.right{
     
     display: block;
 }
+
+.main-stats-table{
+    margin-left: 5%;
+    width: 90%;
+    height: 80%;
+    margin-right: 5%;
+
+    &-left{
+        background-color: #dcdcdc;
+        text-align: left;
+        padding-left: 10px;
+        width: 40%;
+    }
+    &-right{
+        background-color: #c4c4c4;
+        width: 40%;
+        text-align: center;
+    }
+    &-spacer{
+        height: 2px;
+    }
+}
+.dissmissal-type{
+    width: 90%;
+    margin-left:5%;
+    margin-right: 5%;
+    height: 90%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.strike-rate-over-years{
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 90%;
+    margin-top: 5%;
+}
+.data-by-year{
+    width: 50%;
+    margin-left: 2%;
+    
+}
+@media only screen and (max-width: 768px) {
+    .data-by-year{
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-top: 10px;
+    }
+  }
