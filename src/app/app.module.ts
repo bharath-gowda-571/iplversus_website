@@ -13,6 +13,7 @@ import { BatsVsBowlDetailsComponent } from './components/bats-vs-bowl-details/ba
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChartsModule } from 'ng2-charts';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ChartsModule } from 'ng2-charts';
     AppComponent,
     routingComponents,
     BatsVsBowlDetailsComponent,
-    NavbarComponent
+    NavbarComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
