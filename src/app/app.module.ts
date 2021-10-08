@@ -15,6 +15,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChartsModule } from 'ng2-charts';
 import { BatsVsTeamSearchComponent } from './components/bats-vs-team-search/bats-vs-team-search.component';
 
+import { HomeComponent } from './components/home/home.component';
+
+
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { BatsVsTeamSearchComponent } from './components/bats-vs-team-search/bats
     routingComponents,
     BatsVsBowlDetailsComponent,
     NavbarComponent,
-    BatsVsTeamSearchComponent
+
+    BatsVsTeamSearchComponent,
+    HomeComponent
+
   ],
   imports: [
     BrowserModule,
