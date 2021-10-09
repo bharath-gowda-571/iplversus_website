@@ -16,6 +16,7 @@ import { ChartsModule } from 'ng2-charts';
 import { BatsVsTeamSearchComponent } from './components/bats-vs-team-search/bats-vs-team-search.component';
 
 import { HomeComponent } from './components/home/home.component';
+import { BowlVsTeamSearchComponent } from './components/bowl-vs-team-search/bowl-vs-team-search.component';
 
 
 
@@ -27,7 +28,8 @@ import { HomeComponent } from './components/home/home.component';
     NavbarComponent,
 
     BatsVsTeamSearchComponent,
-    HomeComponent
+    HomeComponent,
+    BowlVsTeamSearchComponent
 
   ],
   imports: [
