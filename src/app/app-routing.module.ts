@@ -6,6 +6,7 @@ import { BatsVsBowlDetailsComponent } from './components/bats-vs-bowl-details/ba
 import { BatsVsTeamSearchComponent } from './components/bats-vs-team-search/bats-vs-team-search.component';
 
 import { HomeComponent } from './components/home/home.component';
+import { BatsVsTeamDetailsComponent } from './components/bats-vs-team-details/bats-vs-team-details.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,9 @@ const routes: Routes = [
   },
   {
     path:"batsvsteam",component:BatsVsTeamSearchComponent,
+  },
+  {
+    path:"batsvsteamdetails/:batsman/:team",component:BatsVsTeamDetailsComponent
   },
   {
     path:"batsvsbowldetails/:batsman/:bowler",component:BatsVsBowlDetailsComponent

@@ -35,3 +35,14 @@ export interface Ball{
     year:string,
     extras?:Extras
 }
+
+export interface batVTeam{
+    balls:number, 
+    fours: number,
+    match_id: string,
+    position: number,
+    runs: number,
+    sixes: number,
+    status: string,
+    year: string,
+    }
