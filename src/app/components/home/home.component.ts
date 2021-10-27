@@ -17,6 +17,9 @@ export class HomeComponent implements OnInit {
       case 1:
         this.router.navigate(["/batsvsbowl"])
         break
+      case 2:
+        this.router.navigate(["/batsvsteam"])  
+        break
     }
   }
 }

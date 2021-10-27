@@ -23,6 +23,7 @@
 <div *ngIf="nvr_fcd_off" style="text-align: center;padding-top: 30px;">
   These Players have never faced off
 </div>
+
 <div class="row" *ngIf="!loading && !nvr_fcd_off">
   <div class =" col-md-3 ">
       <h2>All Data</h2>
@@ -147,31 +148,29 @@
       </li>
     </ul>
     <div class="strike-rate-over-years">
-    <div  class="bar-chart" *ngIf="chart_or_data2">
-      <canvas baseChart 
-        [datasets]="barChartData"
-        [labels]="barChartLabels"
-        [options]="barChartOptions"
-        [plugins]="barChartPlugins"
-        [legend]="barChartLegend"
-        [chartType]="barChartType"
-        *ngIf="!loading">
-      </canvas>
-      </div>
-    <div *ngIf="!chart_or_data2">
-      <table class="main-stats-table">
-        <div *ngFor="let year of barChartLabels;index as i" style="display: contents;">
-        <tr >
-          <td class="main-stats-table-left">{{year}}</td>
-          <td class="main-stats-table-right">{{data_each_year[year].strike_rate |number:'1.2-3'}}</td>
-        </tr>
-        <tr class="main-stats-table-spacer"></tr>
-      </div>
-      </table>
-    </div>
-  </div>
-    <div >
+      <div  class="bar-chart" *ngIf="chart_or_data2">
+        <canvas baseChart 
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [plugins]="barChartPlugins"
+          [legend]="barChartLegend"
+          [chartType]="barChartType"
+          *ngIf="!loading">
+        </canvas>
+        </div>
 
+      <div *ngIf="!chart_or_data2">
+        <table class="main-stats-table">
+          <div *ngFor="let year of barChartLabels;index as i" style="display: contents;">
+          <tr >
+            <td class="main-stats-table-left">{{year}}</td>
+            <td class="main-stats-table-right">{{data_each_year[year].strike_rate |number:'1.2-3'}}</td>
+          </tr>
+          <tr class="main-stats-table-spacer"></tr>
+        </div>
+        </table>
+      </div>
     </div>
   </div>
   
