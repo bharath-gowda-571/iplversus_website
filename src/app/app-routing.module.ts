@@ -6,8 +6,11 @@ import { BatsVsBowlDetailsComponent } from './components/bats-vs-bowl-details/ba
 import { BatsVsTeamSearchComponent } from './components/bats-vs-team-search/bats-vs-team-search.component';
 
 import { HomeComponent } from './components/home/home.component';
+
 import { BowlVsTeamSearchComponent } from './components/bowl-vs-team-search/bowl-vs-team-search.component';
 import { BowlVsTeamDetailsComponent } from './components/bowl-vs-team-details/bowl-vs-team-details.component';
+
+import { BatsVsTeamDetailsComponent } from './components/bats-vs-team-details/bats-vs-team-details.component';
 
 const routes: Routes = [
   {
@@ -18,6 +21,10 @@ const routes: Routes = [
   },
   {
     path:"bowlvsteam",component:BowlVsTeamSearchComponent,
+  },
+  {
+    path:"batsvsteamdetails/:batsman/:team",component:BatsVsTeamDetailsComponent
+
   },
   {
     path:"batsvsbowldetails/:batsman/:bowler",component:BatsVsBowlDetailsComponent

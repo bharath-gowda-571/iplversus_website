@@ -35,6 +35,7 @@ export interface Ball{
     year:string,
     extras?:Extras
 }
+
 export interface BowlingInnings{
     balls:number,
     fours:number,
@@ -45,3 +46,16 @@ export interface BowlingInnings{
     status:string,
     year:string
 }
+
+
+export interface batVTeam{
+    balls:number, 
+    fours: number,
+    match_id: string,
+    position: number,
+    runs: number,
+    sixes: number,
+    status: string,
+    year: string,
+    }
+

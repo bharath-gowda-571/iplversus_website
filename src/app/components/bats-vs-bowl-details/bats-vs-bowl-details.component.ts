@@ -66,7 +66,7 @@ export class BatsVsBowlDetailsComponent implements OnInit {
           'rgba(217, 83, 79,1)',
           'rgba(129, 78, 40, 1)',
           'rgba(129, 199, 111, 1)'
-    ]
+      ]
     }
   ];
   public loading:boolean=true;
