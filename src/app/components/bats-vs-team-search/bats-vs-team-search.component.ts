@@ -33,8 +33,7 @@ export class BatsVsTeamSearchComponent implements OnInit {
 
     this._playerService.getPlayerPopNames().subscribe(data=>{
       this.players = data;
-      for(var i of this.players)
-      {
+      for(var i of this.players){
         this.popular_player_names.push(i.popular_name);
         this.pop_name_map.set(i.popular_name,i.name);
       }
@@ -87,6 +86,6 @@ export class BatsVsTeamSearchComponent implements OnInit {
       return
     }
 
-    this.router.navigate(['/batsvsbowldetails',batsman_code_name,team]);
+    this.router.navigate(['/batsvsteamdetails',batsman_code_name,team]);
   }
 }
