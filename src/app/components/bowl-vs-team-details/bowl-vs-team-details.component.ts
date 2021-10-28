@@ -149,7 +149,36 @@ export class BowlVsTeamDetailsComponent implements OnInit {
 
       this.data_by_year[inning.year].avg_economy+=inning.economy
 
+      // checking for bowler's best figure in that year
 
+      if(this.data_by_year[inning.year].bestFigure.wickets<inning.wickets)
+      {
+        this.data_by_year[inning.year].bestFigure={
+          wickets:inning.wickets,
+          runs:inning.runs,
+          economy:inning.economy
+        };
+      }
+      else if(this.data_by_year[inning.year].bestFigure.wickets==inning.wickets){
+        if(this.data_by_year[inning.year].bestFigure.runs>inning.runs){
+          this.data_by_year[inning.year].bestFigure={
+            wickets:inning.wickets,
+            runs:inning.runs,
+            economy:inning.economy
+          };
+        }
+        else if(this.data_by_year[inning.year].bestFigure.runs==inning.runs){
+          if(this.data_by_year[inning.year].bestFigure.economy>inning.economy){
+            this.data_by_year[inning.year].bestFigure={
+              wickets:inning.wickets,
+              runs:inning.runs,
+              economy:inning.economy
+            };
+          }
+        }
+      }
+
+      // checking for bowler's best figure
       if(this.best_figure.wickets<inning.wickets){
         this.best_figure={
           wickets:inning.wickets,
