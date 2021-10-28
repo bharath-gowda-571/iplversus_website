@@ -1,0 +1,193 @@
+<div class="main-container">
+    <span>
+            <img src="assets/bowling.png" alt="batsman" class="main-iconimg">
+            <h2>{{bowler}}</h2>
+    </span>
+    <span class="spacer"></span>
+    <span class="spacer"></span>
+    <span class="spacer"></span>
+    <span><h1>Vs</h1></span>
+    <span class="spacer"></span>
+    <span class="spacer"></span>
+    <span class="spacer"></span>
+    <span>
+        <img src="assets/team.png" alt="bowler" class="main-iconimg">
+        <h2>{{team}}</h2>
+    </span>
+</div>
+<hr>
+<div class="text-center" *ngIf="loading">
+    <div class="spinner-border" role="status">    
+  </div>
+</div>
+
+<div *ngIf="nvr_fcd_off" style="text-align: center;padding-top: 30px;">
+    {{bowler}} has never played against {{team}}
+</div>
+
+<div class="row" *ngIf="!loading && !nvr_fcd_off">
+    <div class="col-md-3">
+        <h2>All Data</h2>
+        <table class="main-stats-table">
+            <tr>
+                <td class="main-stats-table-left">Innings</td>
+                <td class="main-stats-table-right">{{data.length}}</td>
+            </tr>
+            <tr class="main-stats-table-spacer"></tr>
+            <tr>
+                <td class="main-stats-table-left">Balls</td>
+                <td class="main-stats-table-right">{{balls}}</td>
+            </tr>
+            <tr class="main-stats-table-spacer"></tr>
+            
+            <tr>
+                <td class="main-stats-table-left">Overs</td>
+                <td class="main-stats-table-right">{{overs }}</td>
+            </tr>
+            <tr class="main-stats-table-spacer"></tr>
+            
+            <tr>
+                <td class="main-stats-table-left">Runs</td>
+                <td class="main-stats-table-right">{{runs}}</td>
+            </tr>
+            <tr class="main-stats-table-spacer"></tr>
+            
+            <tr>
+                <td class="main-stats-table-left">Wickets</td>
+                <td class="main-stats-table-right">{{wickets}}</td>
+            </tr>
+            <tr class="main-stats-table-spacer"></tr>
+            
+            <tr>
+                <td class="main-stats-table-left">Avg Economy</td>
+                <td class="main-stats-table-right">{{avg_economy| number:'1.2-3'}}</td>
+            </tr>
+            <tr class="main-stats-table-spacer"></tr>
+            
+            <tr>
+                <td class="main-stats-table-left">Fours</td>
+                <td class="main-stats-table-right">{{fours}}</td>
+            </tr>
+            <tr class="main-stats-table-spacer"></tr>
+            
+            <tr>
+                <td class="main-stats-table-left">Sixes</td>
+                <td class="main-stats-table-right">{{sixes}}</td>
+            </tr>
+            <tr class="main-stats-table-spacer"></tr>
+
+            <tr>
+                <td class="main-stats-table-left">Wides</td>
+                <td class="main-stats-table-right">{{wides}}</td>
+            </tr>
+            <tr class="main-stats-table-spacer"></tr>
+
+            <tr>
+                <td class="main-stats-table-left">No Balls</td>
+                <td class="main-stats-table-right">{{noballs}}</td>
+            </tr>
+
+            <tr class="main-stats-table-spacer"></tr>
+
+            <tr>
+                <td class="main-stats-table-left">Best Figures  </td>
+                <td class="main-stats-table-right">{{best_figure.wickets+"-"+best_figure.runs+"("+best_figure.economy+")"}}</td>
+            </tr>
+
+        </table>
+    </div>
+    <div class="col-md-4">
+        <h2>Average Economy</h2>
+        <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item">
+              <a [class]="chartTabClass" aria-current="page" (click)="changeChartOrData('chart')" >Chart</a>
+            </li>
+            <li class="nav-item" >
+              <a [class]="dataTabClass" (click)="changeChartOrData('data')">Data</a>
+            </li>
+          </ul>
+        <div  class="bar-chart" *ngIf="chart_or_data" >
+            <canvas baseChart 
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [plugins]="barChartPlugins"
+              [legend]="barChartLegend"
+              [chartType]="barChartType"
+              *ngIf="!loading">
+            </canvas>
+        </div>
+        <div *ngIf='!chart_or_data'>
+            <table class="main-stats-table">
+                <div *ngFor="let year of barChartLabels;index as i" style="display: contents;">
+                    <tr>
+                        <td class="main-stats-table-left">{{year}}</td>
+                        <td class="main-stats-table-right">{{data_by_year[year].avg_economy | number:'1.2-3'}}</td>
+                    </tr>
+                    <tr class="main-stats-table-spacer"></tr>
+                </div>
+            </table>
+
+        </div>        
+    </div>
+    <div class="col-md-5">
+        <h2>Data By Year</h2>
+        <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item" *ngFor="let year of barChartLabels;index as i">
+                <a [class]='yearTabsStyles[i]' aria-current="page" (click)="switchYear(i)">{{year}}</a>
+            </li>
+        </ul>
+        <div>
+            <div *ngFor="let year of barChartLabels;index as i">
+                <div *ngIf="i==currentYearIndex" class="data-by-year">
+                    <table class="main-stats-table">
+                        <tr>
+                            <td class="main-stats-table-left">Innings</td>
+                            <td class="main-stats-table-right">{{data_by_year[year].innings}}</td>
+                        </tr>
+                        <tr>
+                            <td class="main-stats-table-left">Runs</td>
+                            <td class="main-stats-table-right">{{data_by_year[year].runs}}</td>
+                        </tr>
+                        <tr>
+                            <td class="main-stats-table-left">Balls</td>
+                            <td class="main-stats-table-right">{{data_by_year[year].balls}}</td>
+                        </tr>
+                        <tr>
+                            <td class="main-stats-table-left">Overs</td>
+                            <td class="main-stats-table-right">{{data_by_year[year].overs}}</td>
+                        </tr>
+                        <tr>
+                            <td class="main-stats-table-left">Wickets</td>
+                            <td class="main-stats-table-right">{{data_by_year[year].wickets}}</td>
+                        </tr>
+                        <tr>
+                            <td class="main-stats-table-left">Average Economy</td>
+                            <td class="main-stats-table-right">{{data_by_year[year].avg_economy}}</td>
+                        </tr>
+                        <tr>
+                            <td class="main-stats-table-left">Fours</td>
+                            <td class="main-stats-table-right">{{data_by_year[year].fours}}</td>
+                        </tr>
+                        <tr>
+                            <td class="main-stats-table-left">Sixes</td>
+                            <td class="main-stats-table-right">{{data_by_year[year].sixes}}</td>
+                        </tr>
+                        <tr>
+                            <td class="main-stats-table-left">Wides</td>
+                            <td class="main-stats-table-right">{{data_by_year[year].wides}}</td>
+                        </tr>
+                        <tr>
+                            <td class="main-stats-table-left">No Balls</td>
+                            <td class="main-stats-table-right">{{data_by_year[year].noballs}}</td>
+                        </tr>
+                        <tr>
+                            <td class="main-stats-table-left">Best Figure</td>
+                            <td class="main-stats-table-right">{{data_by_year[year].bestFigure.wickets+"-"+data_by_year[year].bestFigure.runs+"("+data_by_year[year].bestFigure.economy+")"}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

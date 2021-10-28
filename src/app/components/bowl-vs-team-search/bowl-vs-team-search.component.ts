@@ -78,13 +78,13 @@ export class BowlVsTeamSearchComponent implements OnInit {
   
   ButtonClick(){
     
-    var batsman=this.myControl1.value;
+    var bowler=this.myControl1.value;
     var team=this.myControl2.value;
-    var batsman_code_name=this.pop_name_map.get(batsman)
+    var bowler_code_name=this.pop_name_map.get(bowler)
 
     
-    if(batsman_code_name==undefined){
-      this.error_msg="Choose a batsman"
+    if(bowler_code_name==undefined){
+      this.error_msg="Choose a bowler"
       return
     }
 
@@ -93,6 +93,6 @@ export class BowlVsTeamSearchComponent implements OnInit {
       return
     }
 
-    this.router.navigate(['/batsvsbowldetails',batsman_code_name,team]);
+    this.router.navigate(['/bowlvsteamdetails',bowler_code_name,team]);
   }
 }

@@ -2,7 +2,7 @@
     <form>
         <mat-form-field appearance="outline">
             <mat-label>Bowler</mat-label>
-            <input type="text" placeholder="Search Batsman" aria-label="Bowler" matInput [formControl]="myControl1"
+            <input type="text" placeholder="Search Bowler" aria-label="Bowler" matInput [formControl]="myControl1"
                 [matAutocomplete]="auto1">
             <mat-autocomplete #auto1="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptions1 | async" [value]="option">

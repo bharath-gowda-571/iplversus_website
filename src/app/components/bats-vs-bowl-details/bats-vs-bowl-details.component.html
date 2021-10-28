@@ -105,8 +105,8 @@
       <li class="nav-item" >
         <a [class]="dataTabClass" (click)="changeChartOrData('data')">Data</a>
       </li>
-      
     </ul>
+
     <div class="dissmissal-type">
     <div  class="pie-chart" *ngIf="dissmissal!=0 && chart_or_data1">
       <canvas baseChart 
@@ -185,7 +185,7 @@
       <a [class]="yearTabsStyles[i]" aria-current="page" (click)="switchYear(i)">{{year}}</a>
     </li>
   </ul>
-  <div [ngSwitch]="currentYearIndex">
+  <div >
     <div *ngFor="let year of barChartLabels;index as i">
     <div *ngIf="i==currentYearIndex" class="data-by-year">
       <h3>

@@ -17,6 +17,7 @@ import { BatsVsTeamSearchComponent } from './components/bats-vs-team-search/bats
 
 import { HomeComponent } from './components/home/home.component';
 import { BowlVsTeamSearchComponent } from './components/bowl-vs-team-search/bowl-vs-team-search.component';
+import { BowlVsTeamDetailsComponent } from './components/bowl-vs-team-details/bowl-vs-team-details.component';
 
 
 
@@ -29,7 +30,8 @@ import { BowlVsTeamSearchComponent } from './components/bowl-vs-team-search/bowl
 
     BatsVsTeamSearchComponent,
     HomeComponent,
-    BowlVsTeamSearchComponent
+    BowlVsTeamSearchComponent,
+    BowlVsTeamDetailsComponent
 
   ],
   imports: [
