@@ -68,9 +68,7 @@ export class BatsVsTeamDetailsComponent implements OnInit {
   ba_chart_data: any = [];
   lineChartLabels1: string[] = [];
 
-  constructor(private route:ActivatedRoute, private _playerService:PlayersService) { 
-
-  }
+  constructor(private route:ActivatedRoute, private _playerService:PlayersService) { }
 
   async ngOnInit(): Promise<void> {
 
@@ -186,22 +184,33 @@ export class BatsVsTeamDetailsComponent implements OnInit {
     this.strike_rate = ((this.runs/this.balls)*100).toFixed(2);
 
 
-    for(var i of this.lineChartLabels1){
+    this.bat_avg_problem(this.lineChartLabels1, 0);
+    for(var i of this.lineChartLabels)
       this.sr_chart_data.push(this.data_each_year[i].strike_rate);
-      if(this.data_each_year[i].dissmissals==0){
-        this.lineChartLabels1.splice(this.lineChartLabels1.indexOf(i), 1);
-        console.log("executing")
-        continue
-      }
-      this.ba_chart_data.push(this.data_each_year[i].bat_avg);
-    }
-
     
+
+    for(var i of this.lineChartLabels1)
+      this.ba_chart_data.push(this.data_each_year[i].bat_avg);
+    //console.log(this.lineChartLabels1);
+    console.log(this.bat_pos);
 
 
     this.yearTabsStyles=Array(this.lineChartLabels.length).fill("nav-link")
     this.yearTabsStyles[0]="nav-link active"
   }
+
+  bat_avg_problem(arr: string[], i: number){
+
+    if(i==this.lineChartLabels1.length){
+      return;
+    }
+    const year = this.lineChartLabels1[i];
+    if(this.data_each_year[year].dissmissals==0){
+      this.lineChartLabels1.splice(i, 1);
+    }
+    this.bat_avg_problem(this.lineChartLabels1, i+1);
+  }
+
   push_in_sorted_order(arr: string[], year: string): string[] {
     
     if(arr.length==0 || year>arr[arr.length-1]){
