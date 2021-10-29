@@ -1,7 +1,7 @@
 <div class="main-container">
     <span>
         <img src="assets/batting.png" alt="batsman" class="main-iconimg">
-        <h2>batsman</h2>
+        <h2>{{batsman}}</h2>
     </span>
     <span class="spacer"></span>
     <span class="spacer"></span>
@@ -12,7 +12,7 @@
     <span class="spacer"></span>
     <span>
         <img src="assets/team.png" alt="team" class="main-iconimg">
-        <h2>team</h2>
+        <h2>{{team}}</h2>
     </span>
 </div>
 <hr>
@@ -82,7 +82,7 @@
             <tr>
                 <td class="main-stats-table-left">Batting Positions</td>
               
-                <td class="main-stats-table-right">{{bat_pos}}</td>
+                <td class="main-stats-table-right">{{bat_pos.join(',')}}</td>
               </tr>
               <tr class="main-stats-table-spacer"></tr>
             <tr>
@@ -143,8 +143,8 @@
               <table class="main-stats-table">
                 <div *ngFor="let year of lineChartLabels;index as i" style="display: contents;">
                 <tr >
-                  <td class="main-stats-table-left">year</td>
-                  <td class="main-stats-table-right">52</td>
+                  <td class="main-stats-table-left">{{year}}</td>
+                  <td class="main-stats-table-right">{{data_each_year[year].bat_avg}}</td>
                 </tr>
                 <tr class="main-stats-table-spacer"></tr>
               </div>
@@ -179,8 +179,8 @@
             <table class="main-stats-table">
               <div *ngFor="let year of lineChartLabels;index as i" style="display: contents;">
               <tr >
-                <td class="main-stats-table-left">year</td>
-                <td class="main-stats-table-right">52</td>
+                <td class="main-stats-table-left">{{year}}</td>
+                <td class="main-stats-table-right">{{data_each_year[year].strike_rate}}</td>
               </tr>
               <tr class="main-stats-table-spacer"></tr>
             </div>
