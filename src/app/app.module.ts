@@ -16,7 +16,12 @@ import { ChartsModule } from 'ng2-charts';
 import { BatsVsTeamSearchComponent } from './components/bats-vs-team-search/bats-vs-team-search.component';
 
 import { HomeComponent } from './components/home/home.component';
+
+import { BowlVsTeamSearchComponent } from './components/bowl-vs-team-search/bowl-vs-team-search.component';
+import { BowlVsTeamDetailsComponent } from './components/bowl-vs-team-details/bowl-vs-team-details.component';
+
 import { BatsVsTeamDetailsComponent } from './components/bats-vs-team-details/bats-vs-team-details.component';
+
 
 
 
@@ -28,7 +33,10 @@ import { BatsVsTeamDetailsComponent } from './components/bats-vs-team-details/ba
     NavbarComponent,
     BatsVsTeamSearchComponent,
     HomeComponent,
+    BowlVsTeamSearchComponent,
+    BowlVsTeamDetailsComponent,
     BatsVsTeamDetailsComponent
+
   ],
   imports: [
     BrowserModule,

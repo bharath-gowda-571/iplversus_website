@@ -4,6 +4,7 @@ import { Ball } from 'src/app/player_pop_names';
 import { PlayersService } from 'src/app/services/players.service';
 import { ChartType, ChartOptions,ChartDataSets } from 'chart.js';
 import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
+import {push_in_sorted_order} from '../../random_ops';
 
 interface runs_balls_sr{
   runs:number;
@@ -81,7 +82,7 @@ export class BatsVsBowlDetailsComponent implements OnInit {
   }
   };
   public barChartLabels: string[] = [];
-  public barChartType: ChartType = 'bar';
+  public barChartType: ChartType = 'line';
   public barChartLegend = true;
   public barChartPlugins = [];
   public barChartData: ChartDataSets[] = [
@@ -110,35 +111,9 @@ export class BatsVsBowlDetailsComponent implements OnInit {
   public yearTabsStyles!:string[];
 
   
-  push_in_sorted_order(arr:string[],ele:string){
-    
-    if(arr.length==0){
-      arr.push(ele)
-      return arr
-    }
-
-    for(var i=0;i<arr.length-1;i++){
-      if(arr[i]<ele &&ele<arr[i+1]){
-         arr.splice(i+1,0,ele)
-         return arr
-      }
-    }
-    if(ele<arr[0]){
-      
-      arr.splice(0,0,ele)
-    }
-    else if(ele>arr[arr.length-1]){
-      
-      arr.push(ele)
-
-    }
-    return arr
-  }
-
   
 
   async ngOnInit(): Promise<void> {
-
     // getting batsman and bowler name from route 
     this.batsman=this.route.snapshot.paramMap.get("batsman")
     this.bowler=this.route.snapshot.paramMap.get("bowler")
@@ -172,8 +147,8 @@ export class BatsVsBowlDetailsComponent implements OnInit {
               noballs:0,
               wides:0
             }
-            this.barChartLabels=this.push_in_sorted_order(this.barChartLabels,data.year)
-            this.barChartData[0].data!.splice(this.barChartLabels.indexOf(data.year),0,0)
+            this.barChartLabels=push_in_sorted_order(this.barChartLabels,data.year)
+            // this.barChartData[0].data!.splice(this.barChartLabels.indexOf(data.year),0,0)
           }
           // checking if match id is in data_by_match
           if(this.data_by_match[data.match_id]==undefined){
@@ -269,7 +244,8 @@ export class BatsVsBowlDetailsComponent implements OnInit {
       this.yearTabsStyles[0]="nav-link active"
       this.barChartData[0].data!.push(0)
       this.loading=false
-      this.barChartData[0].backgroundColor='rgba(89, 180, 201,1)'
+      this.barChartData[0].backgroundColor='rgba(89, 180, 201,0.5)'
+      this.barChartData[0].pointBackgroundColor='rgba(89, 180, 201,1)'
   
   }
 
@@ -278,6 +254,7 @@ export class BatsVsBowlDetailsComponent implements OnInit {
   public chartTabClass="nav-link active"
   public dataTabClass="nav-link"
 
+  // chaning chart or data (pie chart)
   changeChartOrData(choice:string){
     if(choice=="chart"){
       this.chart_or_data1=true
@@ -291,6 +268,7 @@ export class BatsVsBowlDetailsComponent implements OnInit {
     }
 
   }
+
   public chart_or_data2=true
   public chartTabClass2="nav-link active"
   public dataTabClass2="nav-link"
