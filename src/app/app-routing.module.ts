@@ -29,11 +29,9 @@ const routes: Routes = [
   {
     path:"batsvsbowldetails/:batsman/:bowler",component:BatsVsBowlDetailsComponent
   },
+  
   {
-    path:"home",component:HomeComponent
-  },
-  {
-    path:"",redirectTo:"home",pathMatch:"full"
+    path:"**",component:HomeComponent
   },
   {
     path:"bowlvsteamdetails/:bowler/:team",component:BowlVsTeamDetailsComponent

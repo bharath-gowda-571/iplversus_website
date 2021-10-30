@@ -21,6 +21,7 @@ import { BowlVsTeamSearchComponent } from './components/bowl-vs-team-search/bowl
 import { BowlVsTeamDetailsComponent } from './components/bowl-vs-team-details/bowl-vs-team-details.component';
 
 import { BatsVsTeamDetailsComponent } from './components/bats-vs-team-details/bats-vs-team-details.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 
@@ -35,7 +36,8 @@ import { BatsVsTeamDetailsComponent } from './components/bats-vs-team-details/ba
     HomeComponent,
     BowlVsTeamSearchComponent,
     BowlVsTeamDetailsComponent,
-    BatsVsTeamDetailsComponent
+    BatsVsTeamDetailsComponent,
+    FooterComponent
 
   ],
   imports: [
