@@ -197,8 +197,8 @@ export class BatsVsTeamDetailsComponent implements OnInit {
     }
 
     
-
-
+    console.log(this.bat_pos)
+    
     this.yearTabsStyles=Array(this.lineChartLabels.length).fill("nav-link")
     this.yearTabsStyles[0]="nav-link active"
   }
