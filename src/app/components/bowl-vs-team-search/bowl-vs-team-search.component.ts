@@ -84,13 +84,11 @@ export class BowlVsTeamSearchComponent implements OnInit {
 
     
     if(bowler_code_name==undefined){
-      this.error_msg="Choose a bowler"
-      return
+      this.error_msg="Choose a Bowler"
     }
 
     if(team==undefined){
-      this.error_msg="Choose a team"
-      return
+      this.error_msg="Choose a Team"
     }
 
     this.router.navigate(['/bowlvsteamdetails',bowler_code_name,team]);
