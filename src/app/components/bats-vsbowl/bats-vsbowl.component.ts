@@ -66,20 +66,22 @@ export class BatsVsbowlComponent implements OnInit {
     var bowler_code_name=this.pop_name_map.get(bowler);
     
     if(batsman_code_name==undefined){
-      this.error_msg="Choose a batsman"
-      return
+      this.error_msg="Choose a Batsman"
+      
     }
 
-    if(bowler_code_name==undefined){
-      this.error_msg="Choose a bowler"
-      return
+    else if(bowler_code_name==undefined){
+      this.error_msg="Choose a Bowler"
+      
     }
 
-    if(batsman_code_name==bowler_code_name){
+    else if(batsman_code_name==bowler_code_name){
       this.error_msg="Batsman and Bowler cannot be same"
-      return
+      
     }
-
+    else{
     this.router.navigate(['/batsvsbowldetails',batsman_code_name,bowler_code_name]);
+
+    }
   }
 }

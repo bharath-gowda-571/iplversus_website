@@ -1,6 +1,6 @@
 <div class="main-container">
 <div class="form-container">
-<form >
+<form style="text-align: center;align-items: center;">
     <mat-form-field  appearance="outline">
       <mat-label>Batsman</mat-label>
       <input type="text"
@@ -15,9 +15,7 @@
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
-  </form>
-  
-  <form >
+    <br>
     <mat-form-field  appearance="outline">
       <mat-label>Bowler</mat-label>
       <input type="text"
@@ -32,9 +30,12 @@
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
-  </form>
-  <div *ngIf="error_msg!=undefined">{{error_msg}}</div>
+    <br>
+    <div *ngIf="error_msg!=undefined" class="error-msg">{{error_msg}}</div>
+    <br>
+    <button  mat-flat-button color="primary" (click)="ButtonClick()">Get Data</button>
 
-  <button mat-flat-button color="primary" (click)="ButtonClick()">Get Data</button>
+  </form>
+
 </div>
 </div>

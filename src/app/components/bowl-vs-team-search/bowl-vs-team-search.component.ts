@@ -81,18 +81,18 @@ export class BowlVsTeamSearchComponent implements OnInit {
     var bowler=this.myControl1.value;
     var team=this.myControl2.value;
     var bowler_code_name=this.pop_name_map.get(bowler)
-
+    
     
     if(bowler_code_name==undefined){
-      this.error_msg="Choose a bowler"
-      return
+      this.error_msg="Choose a Bowler"
     }
 
-    if(team==undefined){
-      this.error_msg="Choose a team"
-      return
+    else if(!this.teams.includes(team)){
+      this.error_msg="Choose a Team"
     }
-
+    else{
     this.router.navigate(['/bowlvsteamdetails',bowler_code_name,team]);
+
+    }
   }
 }

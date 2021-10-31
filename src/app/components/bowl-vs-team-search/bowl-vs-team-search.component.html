@@ -10,9 +10,7 @@
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
-    </form>
-
-    <form>
+        <br>
         <mat-form-field appearance="outline">
             <mat-label>Team</mat-label>
             <input type="text" placeholder="Search Team" aria-label="Team" matInput [formControl]="myControl2"
@@ -23,8 +21,9 @@
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
+        <br>
+        <div *ngIf="error_msg!=undefined" class="error-msg">{{error_msg}}</div>
+        <br>
+        <button type="submit" mat-flat-button color="primary" (click)="ButtonClick()">Get Data</button>
     </form>
-    <div *ngIf="error_msg!=undefined">{{error_msg}}</div>
-
-    <button mat-flat-button color="primary" (click)="ButtonClick()">Get Data</button>
 </div>
