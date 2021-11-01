@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { batVTeam } from 'src/app/player_pop_names';
 import { PlayersService } from 'src/app/services/players.service';
-import {Title} from '@angular/platform-browser';
 
 interface DataEachYear{
   [year:string]:{
@@ -69,14 +68,13 @@ export class BatsVsTeamDetailsComponent implements OnInit {
   ba_chart_data: any = [];
   lineChartLabels1: string[] = [];
 
-  constructor(private route:ActivatedRoute, private _playerService:PlayersService,private titleService:Title) { }
+  constructor(private route:ActivatedRoute, private _playerService:PlayersService) { }
 
   async ngOnInit(): Promise<void> {
 
     this.batsman = this.route.snapshot.paramMap.get("batsman")
     this.team = this.route.snapshot.paramMap.get("team")
 
-    this.titleService.setTitle(this.batsman+" Vs "+this.team)
     this.batVTeamData = await this._playerService.getBatsmanVsTeamData(this.batsman,this.team);
 
     this.loading = false
@@ -194,8 +192,8 @@ export class BatsVsTeamDetailsComponent implements OnInit {
 
     for(var i of this.lineChartLabels1)
       this.ba_chart_data.push(this.data_each_year[i].bat_avg);
-    console.log(this.bat_pos);
-    
+    //console.log(this.lineChartLabels1);
+
     this.yearTabsStyles=Array(this.lineChartLabels.length).fill("nav-link")
     this.yearTabsStyles[0]="nav-link active"
   }
@@ -248,6 +246,7 @@ export class BatsVsTeamDetailsComponent implements OnInit {
   public lineChart1Legend = true;
   public lineChart1Plugins = [];
   public lineChart1Data: ChartDataSets[] = [
+
     { data: this.ba_chart_data, label: 'Batting Average',backgroundColor:'rgba(167, 250, 112,0.5)',pointBackgroundColor:'rgba(0, 0, 1,1)' }
   ];
 
@@ -283,10 +282,8 @@ export class BatsVsTeamDetailsComponent implements OnInit {
   public lineChart2Legend = true;
   public lineChart2Plugins = [];
   public lineChart2Data: ChartDataSets[] = [
-    { data: this.sr_chart_data, label: 'Strike Rate' ,backgroundColor:'rgba(89, 180, 201,0.5)',pointBackgroundColor:'rgba(0, 0, 0,1)'}
+    { data: this.sr_chart_data, label: 'Strike Rate' }
   ];
-  // this.lineChart2Data[0].backgroundColor='rgba(89, 180, 201,0.5)';
-  // this.barChartData[0].pointBackgroundColor='rgba(89, 180, 201,1)';
 
   public chart_or_data2=true
   public chartTabClass2 = "nav-link active"
