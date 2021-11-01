@@ -80,14 +80,15 @@ export class BatsVsTeamSearchComponent implements OnInit {
     
     if(batsman_code_name==undefined){
       this.error_msg="Choose a batsman"
-      return
+      
     }
 
-    if(team==undefined){
+    else if(!this.teams.includes(team)){
       this.error_msg="Choose a team"
-      return
+      
     }
-
-    this.router.navigate(['/batsvsteamdetails',batsman_code_name,team]);
+    else{
+      this.router.navigate(['/batsvsteamdetails',batsman_code_name,team]);
+    }
   }
 }
