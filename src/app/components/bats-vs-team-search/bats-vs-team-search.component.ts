@@ -76,7 +76,6 @@ export class BatsVsTeamSearchComponent implements OnInit {
     var batsman=this.myControl1.value;
     var team=this.myControl2.value;
     var batsman_code_name=this.pop_name_map.get(batsman)
-
     
     if(batsman_code_name==undefined){
       this.error_msg="Choose a batsman"
@@ -89,6 +88,7 @@ export class BatsVsTeamSearchComponent implements OnInit {
     }
     else{
       this.router.navigate(['/batsvsteamdetails',batsman_code_name,team]);
+
     }
   }
 }
