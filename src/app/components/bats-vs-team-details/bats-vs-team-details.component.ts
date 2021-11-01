@@ -193,7 +193,6 @@ export class BatsVsTeamDetailsComponent implements OnInit {
 
     for(var i of this.lineChartLabels1)
       this.ba_chart_data.push(this.data_each_year[i].bat_avg);
-    //console.log(this.lineChartLabels1);
     console.log(this.bat_pos);
     
     this.yearTabsStyles=Array(this.lineChartLabels.length).fill("nav-link")
