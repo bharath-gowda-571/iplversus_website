@@ -74,15 +74,14 @@ export class BatsVsTeamSearchComponent implements OnInit {
     var batsman=this.myControl1.value;
     var team=this.myControl2.value;
     var batsman_code_name=this.pop_name_map.get(batsman)
-
     
     if(batsman_code_name==undefined){
-      this.error_msg="Choose a batsman"
+      this.error_msg="Choose a valid batsman name"
       return
     }
 
-    if(team==undefined){
-      this.error_msg="Choose a team"
+    if(!this.team_names.includes(team)){
+      this.error_msg="Choose a valid team name"
       return
     }
 

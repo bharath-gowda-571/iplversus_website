@@ -1,5 +1,6 @@
 <div class="main-container">
-    <form>
+    <div class="form-container">
+    <form style="text-align: center;align-items: center;">
         <mat-form-field appearance="outline">
             <mat-label>Batsman</mat-label>
             <input type="text" placeholder="Search Batsman" aria-label="Batsman" matInput [formControl]="myControl1"
@@ -23,9 +24,9 @@
             </mat-autocomplete>
         </mat-form-field>
         <br>
-        <div *ngIf="error_msg!=undefined">{{error_msg}}</div>
+        <div *ngIf="error_msg!=undefined" class="error-msg">{{error_msg}}</div>
         <br>
-    <button mat-flat-button color="primary" (click)="ButtonClick()" >Get Data</button>
+    <button mat-flat-button color="primary" type="button" (click)="ButtonClick()" >Get Data</button>
     </form>
-    
+    </div>
 </div>
