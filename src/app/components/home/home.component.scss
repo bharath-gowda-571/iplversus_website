@@ -20,6 +20,8 @@
 }
 .para{
     font-size: 18px;
+    text-align: justify;
+    text-justify: inter-word;
 }
 .batsman-img{
     margin-top: 50px;
@@ -32,6 +34,9 @@
     }
     .main-container{
         align-content: center;
-        // text-justify: inter-word;
+        margin: 0;
+        margin-top: 30px;
+        
     }
+    
   }

@@ -5,6 +5,7 @@ import { PlayersService } from 'src/app/services/players.service';
 import { ChartType, ChartOptions,ChartDataSets } from 'chart.js';
 import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
 import {push_in_sorted_order} from '../../random_ops';
+import {Title} from '@angular/platform-browser';
 
 interface runs_balls_sr{
   runs:number;
@@ -38,7 +39,7 @@ export interface IHash {
 
 
 export class BatsVsBowlDetailsComponent implements OnInit {
-  constructor(private route:ActivatedRoute,private _playerService:PlayersService) {
+  constructor(private route:ActivatedRoute,private _playerService:PlayersService,private titleService:Title) {
     monkeyPatchChartJsLegend();
     monkeyPatchChartJsTooltip();
    }
@@ -114,10 +115,12 @@ export class BatsVsBowlDetailsComponent implements OnInit {
   
 
   async ngOnInit(): Promise<void> {
+
     // getting batsman and bowler name from route 
     this.batsman=this.route.snapshot.paramMap.get("batsman")
     this.bowler=this.route.snapshot.paramMap.get("bowler")
 
+    this.titleService.setTitle(this.batsman+" Vs "+this.bowler)
     this.ball_data= await this._playerService.getBatsmanVsBowlerData(this.batsman,this.bowler)
 
     if(this.ball_data==null){
@@ -245,7 +248,7 @@ export class BatsVsBowlDetailsComponent implements OnInit {
       this.barChartData[0].data!.push(0)
       this.loading=false
       this.barChartData[0].backgroundColor='rgba(89, 180, 201,0.5)'
-      this.barChartData[0].pointBackgroundColor='rgba(89, 180, 201,1)'
+      this.barChartData[0].pointBackgroundColor='rgba(0, 0, 0,1)'
   
   }
 

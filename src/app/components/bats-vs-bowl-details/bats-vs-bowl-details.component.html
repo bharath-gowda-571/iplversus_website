@@ -64,7 +64,7 @@
             </tr>
             <tr class="main-stats-table-spacer"></tr>
             <tr>
-              <td class="main-stats-table-left">Dissmisals</td>
+              <td class="main-stats-table-left">Dismissals</td>
             
               <td class="main-stats-table-right">{{dissmissal}}</td>
             </tr>
@@ -98,7 +98,7 @@
   </div>
   <div class="col-md-4 ">
     
-    <h2>Dissmisal Types</h2>
+    <h2>Dismissal Types</h2>
     <ul class="nav nav-pills justify-content-center">
       <li class="nav-item">
         <a [class]="chartTabClass" aria-current="page" (click)="changeChartOrData('chart')" >Chart</a>
@@ -176,8 +176,8 @@
   
 </div>
 
-<hr>
-<div>
+<hr *ngIf="!loading && !nvr_fcd_off">
+<div *ngIf="!loading && !nvr_fcd_off">
   <h2>Data By Year</h2>
   <ul class="nav nav-pills justify-content-center">
     <li class="nav-item" *ngFor="let year of barChartLabels;index as i">
@@ -231,7 +231,7 @@
       <tr class="main-stats-table-spacer"></tr>
 
       <tr>
-        <td class="main-stats-table-left">Dissmisals</td>
+        <td class="main-stats-table-left">Dismissals</td>
         
         <td class="main-stats-table-right">{{data_each_year[year].dissmissals}}</td>
       </tr>

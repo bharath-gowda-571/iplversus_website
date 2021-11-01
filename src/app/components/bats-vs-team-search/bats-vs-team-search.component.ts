@@ -5,6 +5,7 @@ import {map, startWith} from 'rxjs/operators';
 import { PlayerPopName } from 'src/app/player_pop_names';
 import { PlayersService } from 'src/app/services/players.service';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-bats-vs-team-search',
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 })
 
 export class BatsVsTeamSearchComponent implements OnInit {
-  constructor(private _playerService:PlayersService,private router:Router){}
+  constructor(private _playerService:PlayersService,private router:Router,private titleService:Title){}
 
   myControl1:any = new FormControl();
   myControl2:any = new FormControl();
@@ -30,7 +31,8 @@ export class BatsVsTeamSearchComponent implements OnInit {
   error_msg!:string;
 
   ngOnInit() {
-
+    
+    this.titleService.setTitle("Batsman Vs Team Search")
     this._playerService.getPlayerPopNames().subscribe(data=>{
       this.players = data;
       for(var i of this.players){
@@ -76,15 +78,17 @@ export class BatsVsTeamSearchComponent implements OnInit {
     var batsman_code_name=this.pop_name_map.get(batsman)
     
     if(batsman_code_name==undefined){
-      this.error_msg="Choose a valid batsman name"
-      return
+      this.error_msg="Choose a batsman"
+      
     }
 
-    if(!this.team_names.includes(team)){
-      this.error_msg="Choose a valid team name"
-      return
+    else if(!this.teams.includes(team)){
+      this.error_msg="Choose a team"
+      
     }
+    else{
+      this.router.navigate(['/batsvsteamdetails',batsman_code_name,team]);
 
-    this.router.navigate(['/batsvsteamdetails',batsman_code_name,team]);
+    }
   }
 }
