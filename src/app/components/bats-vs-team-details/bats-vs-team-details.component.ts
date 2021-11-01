@@ -175,6 +175,7 @@ export class BatsVsTeamDetailsComponent implements OnInit {
       if(this.data_each_year[data.year].dissmissals!=0){
         this.data_each_year[data.year].bat_avg = (this.data_each_year[data.year].runs/this.data_each_year[data.year].dissmissals).toFixed(2);
       }
+
     }
 
     if(this.dissmissals != 0)
@@ -201,14 +202,16 @@ export class BatsVsTeamDetailsComponent implements OnInit {
 
   bat_avg_problem(arr: string[], i: number){
 
-    if(i==this.lineChartLabels1.length){
+    if(i>=this.lineChartLabels1.length){
       return;
     }
-    const year = this.lineChartLabels1[i];
+    var year = this.lineChartLabels1[i];
     if(this.data_each_year[year].dissmissals==0){
       this.lineChartLabels1.splice(i, 1);
+      this.bat_avg_problem(this.lineChartLabels1, i);
     }
-    this.bat_avg_problem(this.lineChartLabels1, i+1);
+    else
+      this.bat_avg_problem(this.lineChartLabels1, i+1);
   }
 
   push_in_sorted_order(arr: string[], year: string): string[] {
