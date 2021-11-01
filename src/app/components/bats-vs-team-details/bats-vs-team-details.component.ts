@@ -245,7 +245,7 @@ export class BatsVsTeamDetailsComponent implements OnInit {
   public lineChart1Legend = true;
   public lineChart1Plugins = [];
   public lineChart1Data: ChartDataSets[] = [
-    { data: this.ba_chart_data, label: 'Batting Average',backgroundColor:'rgba(167, 250, 112,0.5)',pointBackgroundColor:'rgba(0, 0, 0,1)' }
+    { data: this.ba_chart_data, label: 'Batting Average',backgroundColor:'rgba(167, 250, 112,0.5)',pointBackgroundColor:'rgba(0, 0, 1,1)' }
   ];
 
   public chart_or_data1=true
