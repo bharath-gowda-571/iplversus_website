@@ -176,8 +176,8 @@
   
 </div>
 
-<hr>
-<div>
+<hr *ngIf="!loading && !nvr_fcd_off">
+<div *ngIf="!loading && !nvr_fcd_off">
   <h2>Data By Year</h2>
   <ul class="nav nav-pills justify-content-center">
     <li class="nav-item" *ngFor="let year of barChartLabels;index as i">

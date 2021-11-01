@@ -5,7 +5,7 @@ import {map, startWith} from 'rxjs/operators';
 import { PlayerPopName } from 'src/app/player_pop_names';
 import { PlayersService } from 'src/app/services/players.service';
 import { Router } from '@angular/router';
-
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-bats-vsbowl',
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./bats-vsbowl.component.scss']
 })
 export class BatsVsbowlComponent implements OnInit {
-  constructor(private _playerService:PlayersService,private router:Router){}
+  constructor(private _playerService:PlayersService,private router:Router,private titleService:Title){}
 
   myControl1:any = new FormControl();
   myControl2:any = new FormControl();
@@ -29,6 +29,7 @@ export class BatsVsbowlComponent implements OnInit {
 
   ngOnInit() {
 
+    this.titleService.setTitle("Batsman Vs Bowler Search")
     this._playerService.getPlayerPopNames().subscribe(data=>{
       this.players = data;
       for(var i of this.players)

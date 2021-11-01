@@ -20,8 +20,9 @@
 <div class="text-center" *ngIf="loading">
     <div class="spinner-border" role="status"> </div>   
 </div>
+<div *ngIf="nvr_fcd_off==true" style="text-align: center;;">{{batsman}} has never batted against {{team}}</div>
 
-<div class="row">
+<div class="row" *ngIf="!nvr_fcd_off && !loading">
     <div class=" col-md-4">
         <h2>All Data</h2>
         <table class="main-stats-table">
@@ -190,8 +191,8 @@
   </div>
 </div>
 
-<hr>
-<div>
+<hr *ngIf="!nvr_fcd_off && !loading">
+<div *ngIf="!nvr_fcd_off && !loading">
   <h2>Data By Year</h2>
   <ul class="nav nav-pills justify-content-center">
     <li class="nav-item" *ngFor="let year of lineChartLabels;index as i">
@@ -201,27 +202,7 @@
   <div [ngSwitch]="currentYearIndex">
     <div *ngFor="let year of lineChartLabels;index as i">
     <div *ngIf="i==currentYearIndex" class="data-by-year">
-      <h3>
-        Teams
-      </h3>
-    <table class="main-stats-table">
-      
-      <tr>
-        <td class="main-stats-table-left">batsman</td>
-        
-        <td class="main-stats-table-right">{{batsman}}</td>
-      </tr>
-
-
-      <tr class="main-stats-table-spacer"></tr>
-      <tr>
-        <td class="main-stats-table-left">team</td>
-        
-        <td class="main-stats-table-right">{{team}}</td>
-      </tr>
-    </table>
-      <h3>Data</h3>
-
+      <br>
       <table class="main-stats-table">
       <tr>
         <td class="main-stats-table-left">Innings</td>

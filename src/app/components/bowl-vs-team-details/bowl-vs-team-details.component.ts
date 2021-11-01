@@ -4,7 +4,7 @@ import { PlayersService } from 'src/app/services/players.service';
 import {push_in_sorted_order} from '../../random_ops';
 import { ChartType, ChartOptions,ChartDataSets } from 'chart.js';
 // import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
-
+import {Title} from '@angular/platform-browser';
 
 interface BestFigure{
   wickets:number,
@@ -69,18 +69,20 @@ export class BowlVsTeamDetailsComponent implements OnInit {
   public barChartLegend = true;
   public barChartPlugins = [];
   public barChartData: ChartDataSets[] = [
-    { data: [], label: 'Average Economy' }
+    { data: [], label: 'Average Economy' ,backgroundColor:'rgba(89, 180, 201,0.5)',pointBackgroundColor:'rgba(0, 0, 0,1)' }
   ];
   public yearTabsStyles!:string[];
 
-  constructor(private route:ActivatedRoute,public _playerService:PlayersService) { }
+  constructor(private route:ActivatedRoute,public _playerService:PlayersService,private titleService:Title) { }
 
 
   async ngOnInit(): Promise<void> {
+
     // getting bowler and team name from route 
     this.bowler=this.route.snapshot.paramMap.get("bowler")
     this.team=this.route.snapshot.paramMap.get("team")
 
+    this.titleService.setTitle(this.bowler+" Vs "+this.team)
     
     this.data= await this._playerService.getBowlerVsTeamData(this.bowler,this.team);
     if(this.data==null){

@@ -11,7 +11,7 @@ import {map, startWith} from 'rxjs/operators';
 import { PlayerPopName } from 'src/app/player_pop_names';
 import { PlayersService } from 'src/app/services/players.service';
 import { Router } from '@angular/router';
-
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-bowl-vs-team-search',
   templateUrl: './bowl-vs-team-search.component.html',
@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
 })
 
 export class BowlVsTeamSearchComponent implements OnInit {
-  constructor(private _playerService:PlayersService,private router:Router){}
+  constructor(private _playerService:PlayersService,private router:Router,private titleService:Title){}
 
   myControl1:any = new FormControl();
   myControl2:any = new FormControl();
@@ -36,7 +36,7 @@ export class BowlVsTeamSearchComponent implements OnInit {
   error_msg!:string;
 
   ngOnInit() {
-
+    this.titleService.setTitle("Bowler Vs Team Search")
     this._playerService.getPlayerPopNames().subscribe(data=>{
       this.players = data;
       for(var i of this.players)
