@@ -283,7 +283,7 @@ export class BatsVsTeamDetailsComponent implements OnInit {
   public lineChart2Legend = true;
   public lineChart2Plugins = [];
   public lineChart2Data: ChartDataSets[] = [
-    { data: this.sr_chart_data, label: 'Strike Rate' ,backgroundColor:'rgba(89, 180, 201,0.5)',pointBackgroundColor:'rgba(0, 0, 0,1)'}
+    { data: this.sr_chart_data, label: 'Strike Rate' ,backgroundColor:'rgba(89, 180, 201,0.5)',pointBackgroundColor:'rgba(0, 0, 1,1)'}
   ];
   // this.lineChart2Data[0].backgroundColor='rgba(89, 180, 201,0.5)';
   // this.barChartData[0].pointBackgroundColor='rgba(89, 180, 201,1)';
