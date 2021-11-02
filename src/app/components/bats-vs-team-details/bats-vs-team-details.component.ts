@@ -20,6 +20,7 @@ interface DataEachYear{
     thirties:number;
     fifties:number;
     hundreds:number;
+    status:string
   }
 }
 
@@ -67,6 +68,7 @@ export class BatsVsTeamDetailsComponent implements OnInit {
   sr_chart_data: any = [];
   ba_chart_data: any = [];
   lineChartLabels1: string[] = [];
+  status: string ="out";
 
   constructor(private route:ActivatedRoute, private _playerService:PlayersService) { }
 
@@ -101,7 +103,8 @@ export class BatsVsTeamDetailsComponent implements OnInit {
           ducks:0,
           thirties:0,
           fifties:0,
-          hundreds:0
+          hundreds:0,
+          status: "not out"
         }
 
         this.lineChartLabels = this.push_in_sorted_order(this.lineChartLabels, data.year)
@@ -125,8 +128,12 @@ export class BatsVsTeamDetailsComponent implements OnInit {
       //runs
       this.runs += data.runs;
       this.data_each_year[data.year].runs += data.runs;
-      if(data.runs>this.h_score)
+      if(data.runs>this.h_score){
         this.h_score = data.runs;
+        this.status = data.status;
+    }
+      if(data.runs>this.data_each_year[data.year].h_score)
+        this.data_each_year[data.year].h_score = data.runs;  
       if(data.runs==0){
         this.ducks++;
         this.data_each_year[data.year].ducks++;
@@ -165,6 +172,7 @@ export class BatsVsTeamDetailsComponent implements OnInit {
       
       //dismissals
       if(data.status == "out"){
+        this.data_each_year[data.year].status = "out";
         this.dissmissals++;
         this.data_each_year[data.year].dissmissals++;
       }

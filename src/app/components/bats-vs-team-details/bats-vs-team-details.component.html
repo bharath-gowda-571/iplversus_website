@@ -89,7 +89,7 @@
             <tr>
                 <td class="main-stats-table-left">Highest Score</td>
               
-                <td class="main-stats-table-right">{{h_score}}</td>
+                <td class="main-stats-table-right">{{h_score}}<span *ngIf="status != 'out'">*</span></td>
               </tr>
               <tr class="main-stats-table-spacer"></tr>
               <tr>
@@ -269,7 +269,7 @@
 
       <tr>
         <td class="main-stats-table-left">Highest Score</td>
-        <td class="main-stats-table-right">{{data_each_year[year].h_score}}</td>
+        <td class="main-stats-table-right">{{data_each_year[year].h_score}}<span *ngIf="data_each_year[year].status != 'out'">*</span></td>
       </tr>
 
       <tr class="main-stats-table-spacer"></tr>
