@@ -1,6 +1,16 @@
+
 .main{
     &-container{
-        margin-top: 100px;
+        
+        height: 80vh;
         text-align: center;
+        background-image: url(../../../assets/bowler_large_background.png),url(../../../assets/team_large_background.png);
+        background-position: right,left;
+        background-repeat: no-repeat,no-repeat;
+        align-content: center;
     }
+}
+
+.form-container{
+    padding-top: 100px;
 }
