@@ -89,7 +89,9 @@
             <tr>
                 <td class="main-stats-table-left">Highest Score</td>
               
-                <td class="main-stats-table-right">{{h_score}}<span *ngIf="status != 'out'">*</span></td>
+                <td class="main-stats-table-right">{{h_score["score"]}}
+                  <span >({{h_score["balls"]}})</span>
+                  <span *ngIf="h_score['status'] != 'out'">*</span></td>
               </tr>
               <tr class="main-stats-table-spacer"></tr>
               <tr>
@@ -269,7 +271,10 @@
 
       <tr>
         <td class="main-stats-table-left">Highest Score</td>
-        <td class="main-stats-table-right">{{data_each_year[year].h_score}}<span *ngIf="data_each_year[year].status != 'out'">*</span></td>
+        <td class="main-stats-table-right">{{data_each_year[year].h_score["score"]}}
+          <span>({{data_each_year[year].h_score["balls"]}})</span>
+          <span *ngIf="data_each_year[year].h_score['status'] != 'out'">*</span>
+        </td>
       </tr>
 
       <tr class="main-stats-table-spacer"></tr>
