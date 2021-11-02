@@ -128,16 +128,40 @@ export class BatsVsTeamDetailsComponent implements OnInit {
       //runs
       this.runs += data.runs;
       this.data_each_year[data.year].runs += data.runs;
+
+      //highscore
       if(data.runs>this.h_score["score"]){
         this.h_score["score"] = data.runs;
         this.h_score["status"] = data.status;
         this.h_score["balls"] = data.balls;
-    }
+      }
+      else if(data.runs==this.h_score["score"]){
+        if(data.balls<this.h_score["balls"]){
+          this.h_score["balls"] = data.balls;
+          this.h_score["status"] = data.status;
+        }
+        else if(data.balls==this.h_score["balls"]){
+          if(data.status == 'not out' || this.h_score["status"] == 'not out')
+            this.h_score["status"] = 'not out';
+        }
+      }
+      
       if(data.runs>this.data_each_year[data.year].h_score["score"]){
         this.data_each_year[data.year].h_score["score"] = data.runs;
         this.data_each_year[data.year].h_score["status"] = data.status;
         this.data_each_year[data.year].h_score["balls"] = data.balls;
+      }
+      else if(data.runs==this.data_each_year[data.year].h_score["score"]){
+        if(data.balls<this.data_each_year[data.year].h_score["balls"]){
+          this.data_each_year[data.year].h_score["balls"] = data.balls;
+          this.data_each_year[data.year].h_score["status"] = data.status;
+        }
+        else if(data.balls==this.data_each_year[data.year].h_score["balls"]){
+          if(data.status == 'not out' || this.data_each_year[data.year].h_score["status"] == 'not out')
+            this.data_each_year[data.year].h_score["status"] = 'not out';
+        }
       }  
+
       if(data.runs==0){
         this.ducks++;
         this.data_each_year[data.year].ducks++;
