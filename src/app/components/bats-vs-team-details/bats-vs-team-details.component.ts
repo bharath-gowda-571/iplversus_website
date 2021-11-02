@@ -14,7 +14,7 @@ interface DataEachYear{
     fours:number;
     sixes:number;
     dissmissals:number;
-    h_score:number;
+    h_score:any;
     bat_pos:number[];
     ducks:number;
     thirties:number;
@@ -55,7 +55,7 @@ export class BatsVsTeamDetailsComponent implements OnInit {
   fours: number = 0;
   sixes: number = 0;
   balls: number = 0 ;
-  h_score: number = 0;
+  h_score: any = {score:0, status:"out", balls:0};
   ducks: number = 0;
   thirties: number = 0;
   fifties: number = 0;
@@ -68,7 +68,7 @@ export class BatsVsTeamDetailsComponent implements OnInit {
   sr_chart_data: any = [];
   ba_chart_data: any = [];
   lineChartLabels1: string[] = [];
-  status: string ="out";
+
 
   constructor(private route:ActivatedRoute, private _playerService:PlayersService) { }
 
@@ -98,7 +98,7 @@ export class BatsVsTeamDetailsComponent implements OnInit {
           fours:0,
           sixes:0,
           dissmissals:0,
-          h_score:0,
+          h_score:{score:0, status:"out", balls:0},
           bat_pos:[],
           ducks:0,
           thirties:0,
@@ -128,12 +128,16 @@ export class BatsVsTeamDetailsComponent implements OnInit {
       //runs
       this.runs += data.runs;
       this.data_each_year[data.year].runs += data.runs;
-      if(data.runs>this.h_score){
-        this.h_score = data.runs;
-        this.status = data.status;
+      if(data.runs>this.h_score["score"]){
+        this.h_score["score"] = data.runs;
+        this.h_score["status"] = data.status;
+        this.h_score["balls"] = data.balls;
     }
-      if(data.runs>this.data_each_year[data.year].h_score)
-        this.data_each_year[data.year].h_score = data.runs;  
+      if(data.runs>this.data_each_year[data.year].h_score["score"]){
+        this.data_each_year[data.year].h_score["score"] = data.runs;
+        this.data_each_year[data.year].h_score["status"] = data.status;
+        this.data_each_year[data.year].h_score["balls"] = data.balls;
+      }  
       if(data.runs==0){
         this.ducks++;
         this.data_each_year[data.year].ducks++;
