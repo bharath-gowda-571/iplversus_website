@@ -113,7 +113,7 @@ export class BatsVsTeamDetailsComponent implements OnInit {
 
       // checking if match id is in data_by_match
       if(this.data_by_match[data.match_id]==undefined){
-        this.data_each_year[data.year].matches.push(data.match_id)
+        // this.data_each_year[data.year].matches.push(data.match_id)
         this.inngs_arr.push(data.match_id)
         this.data_by_match[data.match_id]={
           runs:0,
@@ -229,7 +229,7 @@ export class BatsVsTeamDetailsComponent implements OnInit {
     for(var i of this.lineChartLabels1)
       this.ba_chart_data.push(this.data_each_year[i].bat_avg);
     //console.log(this.lineChartLabels1);
-
+    console.log(this.data_each_year)
     this.yearTabsStyles=Array(this.lineChartLabels.length).fill("nav-link")
     this.yearTabsStyles[0]="nav-link active"
   }
