@@ -113,7 +113,6 @@ export class BatsVsTeamDetailsComponent implements OnInit {
 
       // checking if match id is in data_by_match
       if(this.data_by_match[data.match_id]==undefined){
-        // this.data_each_year[data.year].matches.push(data.match_id)
         this.inngs_arr.push(data.match_id)
         this.data_by_match[data.match_id]={
           runs:0,
