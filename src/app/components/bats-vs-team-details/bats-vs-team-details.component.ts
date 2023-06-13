@@ -165,15 +165,15 @@ export class BatsVsTeamDetailsComponent implements OnInit {
         this.ducks++;
         this.data_each_year[data.year].ducks++;
       }
-      if(data.runs>100){
+      if(data.runs>=100){
         this.hundreds++;
         this.data_each_year[data.year].hundreds++;
       }
-      if(data.runs>50 && data.runs<100){
+      if(data.runs>=50 && data.runs<100){
         this.fifties++;
         this.data_each_year[data.year].fifties++;
       }
-      if(data.runs>30 && data.runs<50){
+      if(data.runs>=30 && data.runs<50){
         this.thirties++;
         this.data_each_year[data.year].thirties++;
       }
@@ -214,7 +214,7 @@ export class BatsVsTeamDetailsComponent implements OnInit {
     if(this.dissmissals != 0)
       this.bat_avg = (this.runs/this.dissmissals).toFixed(2);
     else{
-      this.bat_avg = "he was never out";
+      this.bat_avg = "He was never out";
     }
 
     this.strike_rate = ((this.runs/this.balls)*100).toFixed(2);
@@ -227,8 +227,6 @@ export class BatsVsTeamDetailsComponent implements OnInit {
 
     for(var i of this.lineChartLabels1)
       this.ba_chart_data.push(this.data_each_year[i].bat_avg);
-    //console.log(this.lineChartLabels1);
-    console.log(this.data_each_year)
     this.yearTabsStyles=Array(this.lineChartLabels.length).fill("nav-link")
     this.yearTabsStyles[0]="nav-link active"
   }
