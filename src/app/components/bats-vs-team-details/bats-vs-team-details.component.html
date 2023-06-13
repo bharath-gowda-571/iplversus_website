@@ -1,0 +1,311 @@
+<div class="main-container">
+    <span>
+        <img src="assets/batting.png" alt="batsman" class="main-iconimg">
+        <h2>{{batsman}}</h2>
+    </span>
+    <span class="spacer"></span>
+    <span class="spacer"></span>
+    <span class="spacer"></span>
+    <span><h1>Vs</h1></span>
+    <span class="spacer"></span>
+    <span class="spacer"></span>
+    <span class="spacer"></span>
+    <span>
+        <img src="assets/team.png" alt="team" class="main-iconimg">
+        <h2>{{team}}</h2>
+    </span>
+</div>
+<hr>
+
+<div class="text-center" *ngIf="loading">
+    <div class="spinner-border" role="status"> </div>   
+</div>
+<div *ngIf="nvr_fcd_off==true" style="text-align: center;;">{{batsman}} has never batted against {{team}}</div>
+
+<div class="row" *ngIf="!nvr_fcd_off && !loading">
+    <div class=" col-md-4">
+        <h2>All Data</h2>
+        <table class="main-stats-table">
+            <tr>
+              <td class="main-stats-table-left">Innings</td>
+      
+              <td class="main-stats-table-right">{{innings}}</td>
+            </tr>
+            <tr class="main-stats-table-spacer"></tr>
+  
+            <tr>
+                <td class="main-stats-table-left">Runs</td>
+                
+                <td class="main-stats-table-right">{{runs}}</td>
+              </tr>
+  
+            <tr class="main-stats-table-spacer"></tr>
+  
+              <tr>
+                <td class="main-stats-table-left">Balls</td>
+              
+                <td class="main-stats-table-right">{{balls}}</td>
+              </tr>
+              <tr class="main-stats-table-spacer"></tr>
+  
+              <tr>
+                <td class="main-stats-table-left">Avg Strike Rate</td>
+              
+                <td class="main-stats-table-right">{{strike_rate}}</td>
+              </tr>
+              <tr class="main-stats-table-spacer"></tr>
+  
+              <tr>
+                <td class="main-stats-table-left">Batting Average</td>
+                
+                <td class="main-stats-table-right">{{bat_avg}}</td>
+              </tr>
+              <tr class="main-stats-table-spacer"></tr>
+              <tr>
+                <td class="main-stats-table-left">Dismissals</td>
+              
+                <td class="main-stats-table-right">{{dissmissals}}</td>
+              </tr>
+            <tr class="main-stats-table-spacer"></tr>
+              <tr>
+                <td class="main-stats-table-left">Sixes</td>
+              
+                <td class="main-stats-table-right">{{sixes}}</td>
+              </tr>
+            <tr class="main-stats-table-spacer"></tr>
+  
+              <tr>
+                <td class="main-stats-table-left">Fours</td>
+              
+                <td class="main-stats-table-right">{{fours}}</td>
+              </tr>
+            <tr class="main-stats-table-spacer"></tr>
+            <tr>
+                <td class="main-stats-table-left">Batting Positions</td>
+              
+                <td class="main-stats-table-right">{{bat_pos.join(',')}}</td>
+              </tr>
+              <tr class="main-stats-table-spacer"></tr>
+            <tr>
+                <td class="main-stats-table-left">Highest Score</td>
+              
+                <td class="main-stats-table-right">{{h_score["score"]}}
+                  <span >({{h_score["balls"]}})</span>
+                  <span *ngIf="h_score['status'] != 'out'">*</span></td>
+              </tr>
+              <tr class="main-stats-table-spacer"></tr>
+              <tr>
+                <td class="main-stats-table-left">Ducks</td>
+              
+                <td class="main-stats-table-right">{{ducks}}</td>
+              </tr>
+            <tr class="main-stats-table-spacer"></tr>
+              <tr>
+                <td class="main-stats-table-left">30s</td>
+              
+                <td class="main-stats-table-right">{{thirties}}</td>
+              </tr>
+              <tr class="main-stats-table-spacer"></tr>
+              <tr>
+                <td class="main-stats-table-left">50s</td>
+              
+                <td class="main-stats-table-right">{{fifties}}</td>
+              </tr>
+              <tr class="main-stats-table-spacer"></tr>
+              <tr>
+                <td class="main-stats-table-left">100s</td>
+              
+                <td class="main-stats-table-right">{{hundreds}}</td>
+              </tr>
+          </table>
+    </div>
+    <div class=" col-md-4">
+        <h2>Batting Average Over the Years</h2>
+        <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item">
+              <a [class]="chartTabClass1" aria-current="page" (click)="changeChartOrData1('chart')">Chart</a>
+            </li>
+            <li class="nav-item">
+              <a [class]="dataTabClass1" (click)="changeChartOrData1('data')">Data</a>
+            </li>
+          </ul>
+          <div class="strike-rate-over-years">
+            <div  class="line-chart" *ngIf="chart_or_data1">
+              <canvas baseChart 
+                [datasets]="lineChart1Data"
+                [labels]="lineChartLabels1"
+                [options]="lineChart1Options"
+                [plugins]="lineChart1Plugins"
+                [legend]="lineChart1Legend"
+                [chartType]="lineChart1Type"
+              >
+              </canvas>
+              </div>
+      
+            <div *ngIf="!chart_or_data1">
+              <table class="main-stats-table">
+                <div *ngFor="let year of lineChartLabels;index as i" style="display: contents;">
+                <tr >
+                  <td class="main-stats-table-left">{{year}}</td>
+                  <td class="main-stats-table-right">{{data_each_year[year].bat_avg}}</td>
+                </tr>
+                <tr class="main-stats-table-spacer"></tr>
+              </div>
+              </table>
+            </div>
+          </div>
+    </div>
+    <div class="col-md-4">
+      <h2>Strike Rate Over the Years</h2>
+      <ul class="nav nav-pills justify-content-center">
+          <li class="nav-item">
+            <a [class]="chartTabClass2" aria-current="page" (click)="changeChartOrData2('chart')">Chart</a>
+          </li>
+          <li class="nav-item">
+            <a [class]="dataTabClass2" (click)="changeChartOrData2('data')">Data</a>
+          </li>
+        </ul>
+        <div class="strike-rate-over-years">
+          <div  class="line-chart" *ngIf="chart_or_data2">
+            <canvas baseChart 
+              [datasets]="lineChart2Data"
+              [labels]="lineChartLabels"
+              [options]="lineChart2Options"
+              [plugins]="lineChart2Plugins"
+              [legend]="lineChart2Legend"
+              [chartType]="lineChart2Type"
+            >
+            </canvas>
+            </div>
+    
+          <div *ngIf="!chart_or_data2">
+            <table class="main-stats-table">
+              <div *ngFor="let year of lineChartLabels;index as i" style="display: contents;">
+              <tr >
+                <td class="main-stats-table-left">{{year}}</td>
+                <td class="main-stats-table-right">{{data_each_year[year].strike_rate}}</td>
+              </tr>
+              <tr class="main-stats-table-spacer"></tr>
+            </div>
+            </table>
+          </div>
+        </div>
+  </div>
+</div>
+
+<hr *ngIf="!nvr_fcd_off && !loading">
+<div *ngIf="!nvr_fcd_off && !loading">
+  <h2>Data By Year</h2>
+  <ul class="nav nav-pills justify-content-center">
+    <li class="nav-item" *ngFor="let year of lineChartLabels;index as i">
+      <a [class]="yearTabsStyles[i]" aria-current="page" (click)="switchYear(i)">{{year}}</a>
+    </li>
+  </ul>
+  <div [ngSwitch]="currentYearIndex">
+    <div *ngFor="let year of lineChartLabels;index as i">
+    <div *ngIf="i==currentYearIndex" class="data-by-year">
+      <br>
+      <table class="main-stats-table">
+      <tr>
+        <td class="main-stats-table-left">Innings</td>
+        
+        <td class="main-stats-table-right">{{data_each_year[year].matches.length}}</td>
+      </tr>
+      <tr class="main-stats-table-spacer"></tr>
+
+      <tr>
+        <td class="main-stats-table-left">Runs</td> 
+        
+        <td class="main-stats-table-right">{{data_each_year[year].runs}}</td>
+      </tr>
+      <tr class="main-stats-table-spacer"></tr>
+      
+      <tr>
+        <td class="main-stats-table-left">Balls</td>
+        
+        <td class="main-stats-table-right">{{data_each_year[year].balls}}</td>
+      </tr>
+      <tr class="main-stats-table-spacer"></tr>
+
+      <tr>
+        <td class="main-stats-table-left">Dismissals</td>
+        
+        <td class="main-stats-table-right">{{data_each_year[year].dissmissals}}</td>
+      </tr>
+      <tr class="main-stats-table-spacer"></tr>
+      
+      <tr>
+        <td class="main-stats-table-left">Strike Rate</td>
+        
+        <td class="main-stats-table-right">{{data_each_year[year].strike_rate}}</td>
+      </tr>
+      <tr class="main-stats-table-spacer"></tr>
+
+      <tr *ngIf="true">
+        <td class="main-stats-table-left">Batting Average</td>
+        
+        <td class="main-stats-table-right">{{data_each_year[year].bat_avg}}</td>
+      </tr>
+      <tr class="main-stats-table-spacer"></tr>
+
+      <tr>
+        <td class="main-stats-table-left">Fours</td>
+        
+        <td class="main-stats-table-right">{{data_each_year[year].fours}}</td>
+      </tr>
+      <tr class="main-stats-table-spacer"></tr>
+
+      <tr>
+        <td class="main-stats-table-left">Sixes</td>
+        
+        <td class="main-stats-table-right">{{data_each_year[year].sixes}}</td>
+      </tr>
+      <tr class="main-stats-table-spacer"></tr>
+
+      <tr>
+        <td class="main-stats-table-left">Batting Positions</td>
+        <td class="main-stats-table-right">{{data_each_year[year].bat_pos}}</td>
+      </tr>
+      
+      <tr class="main-stats-table-spacer"></tr>
+
+      <tr>
+        <td class="main-stats-table-left">Highest Score</td>
+        <td class="main-stats-table-right">{{data_each_year[year].h_score["score"]}}
+          <span>({{data_each_year[year].h_score["balls"]}})</span>
+          <span *ngIf="data_each_year[year].h_score['status'] != 'out'">*</span>
+        </td>
+      </tr>
+
+      <tr class="main-stats-table-spacer"></tr>
+
+      <tr>
+        <td class="main-stats-table-left">Ducks</td>
+        <td class="main-stats-table-right">{{data_each_year[year].ducks}}</td>
+      </tr>
+
+      <tr class="main-stats-table-spacer"></tr>
+
+      <tr>
+        <td class="main-stats-table-left">30s</td>
+        <td class="main-stats-table-right">{{data_each_year[year].thirties}}</td>
+      </tr>
+      
+      <tr class="main-stats-table-spacer"></tr>
+      
+      <tr>
+        <td class="main-stats-table-left">50s</td>
+        <td class="main-stats-table-right">{{data_each_year[year].fifties}}</td>
+      </tr>
+
+      <tr class="main-stats-table-spacer"></tr>
+
+      <tr>
+        <td class="main-stats-table-left">100s</td>
+        <td class="main-stats-table-right">{{data_each_year[year].hundreds}}</td>
+      </tr>
+    </table>
+  </div>
+  </div>
+  </div>
+</div>

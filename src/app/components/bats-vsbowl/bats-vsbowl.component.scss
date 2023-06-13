@@ -1,0 +1,22 @@
+.main{
+    &-container{
+        
+        height: 80vh;
+        text-align: center;
+        background-image: url(../../../assets/batsman_large_background.png),url(../../../assets/bowler_large_background.png);
+        background-position: right,left;
+        background-repeat: no-repeat,no-repeat;
+        align-content: center;
+    }
+}
+.form-container{
+    padding-top: 100px;
+}
+
+@media only screen and (max-width: 992px) {
+    .main-container{
+        height: 80vh;
+        text-align: center;
+        background: none;
+    }
+  }
