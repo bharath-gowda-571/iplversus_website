@@ -40,5 +40,9 @@ export class PlayersService {
     return (await this.http.get<BowlingInnings[]>("https://ipl-versus-default-rtdb.asia-southeast1.firebasedatabase.app/player_vs_team/"+encodeURI(bowler)+"/"+"bowling/"+encodeURI(team)+".json").toPromise())
 
   }
+
+  async getPlayerPicture(name:string):Promise<string>{
+    return (await this.http.get<string>("https://ipl-versus-default-rtdb.asia-southeast1.firebasedatabase.app/player_pictures/"+encodeURI(name)+".json").toPromise())
+  }
 }
 

@@ -93,6 +93,8 @@ export class BatsVsBowlDetailsComponent implements OnInit {
   public all_data!:Ball[];
   public batsman!:any;
   public bowler!:any;
+  public batsman_image!:string;
+  public bowler_image!:string;
   public ball_keys!:any;
   public ball_data:Ball[]=[];
   public inngs_arr:string[]=[];
@@ -122,6 +124,8 @@ export class BatsVsBowlDetailsComponent implements OnInit {
 
     this.titleService.setTitle(this.batsman+" Vs "+this.bowler)
     this.ball_data= await this._playerService.getBatsmanVsBowlerData(this.batsman,this.bowler)
+    this.batsman_image=await this._playerService.getPlayerPicture(this.batsman)
+    this.bowler_image=await this._playerService.getPlayerPicture(this.bowler)
 
     if(this.ball_data==null){
       this.loading=false

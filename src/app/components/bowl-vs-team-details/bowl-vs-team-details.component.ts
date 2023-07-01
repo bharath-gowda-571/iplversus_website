@@ -38,6 +38,7 @@ interface DataByYear{
 
 export class BowlVsTeamDetailsComponent implements OnInit {
   public bowler:any;
+  public bowler_image!:string;
   public team:any;
   public data:any;
   public loading:boolean=true;
@@ -85,6 +86,7 @@ export class BowlVsTeamDetailsComponent implements OnInit {
     this.titleService.setTitle(this.bowler+" Vs "+this.team)
     
     this.data= await this._playerService.getBowlerVsTeamData(this.bowler,this.team);
+    this.bowler_image=await this._playerService.getPlayerPicture(this.bowler);
     if(this.data==null){
       this.nvr_fcd_off=true
       this.loading=false

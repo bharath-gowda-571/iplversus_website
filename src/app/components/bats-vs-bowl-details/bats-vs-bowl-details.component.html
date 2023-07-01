@@ -1,6 +1,6 @@
 <div class="main-container">
     <span>
-            <img src="assets/batting.png" alt="batsman" class="main-iconimg">
+            <img [src]="batsman_image?batsman_image:'assets/batting.png'" alt="batsman" class="main-iconimg">
             <h2>{{batsman}}</h2>
     </span>
     <span class="spacer"></span>
@@ -11,7 +11,7 @@
     <span class="spacer"></span>
     <span class="spacer"></span>
     <span>
-        <img src="assets/bowling.png" alt="bowler" class="main-iconimg">
+        <img [src]="bowler_image?bowler_image:'assets/bowling.png'" alt="bowler" class="main-iconimg">
         <h2>{{bowler}}</h2>
     </span>
 </div>

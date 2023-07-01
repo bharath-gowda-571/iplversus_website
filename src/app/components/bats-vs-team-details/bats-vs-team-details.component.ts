@@ -50,6 +50,7 @@ export class BatsVsTeamDetailsComponent implements OnInit {
   nvr_fcd_off: boolean = false;
   data_each_year: DataEachYear={};
   public data_by_match:IHash={};
+  public batsman_image!:string;
   inngs_arr:string[]=[];
   runs: number = 0;
   fours: number = 0;
@@ -78,7 +79,7 @@ export class BatsVsTeamDetailsComponent implements OnInit {
     this.team = this.route.snapshot.paramMap.get("team")
 
     this.batVTeamData = await this._playerService.getBatsmanVsTeamData(this.batsman,this.team);
-
+    this.batsman_image=await this._playerService.getPlayerPicture(this.batsman)
     this.loading = false
     if(this.batVTeamData == null){
       this.nvr_fcd_off =true
