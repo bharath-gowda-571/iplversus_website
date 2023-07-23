@@ -17,7 +17,7 @@ export class PlayersService {
      this.BASE_URL="http://localhost:8000/"
     }
     else{
-      this.BASE_URL=" https://ohgjfvrv98.execute-api.ap-south-1.amazonaws.com/prod/"
+      this.BASE_URL="https://ohgjfvrv98.execute-api.ap-south-1.amazonaws.com/prod/"
     }
    }
 
