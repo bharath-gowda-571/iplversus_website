@@ -16,6 +16,7 @@ jobs:
       with:
         node-version: '16.x'
     - run: npm install
+    - run: npm install -g @angular/cli
     - run: ng build --aot
     - uses: w9jds/firebase-action@master
       with:
